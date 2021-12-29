@@ -41,7 +41,7 @@ def save():
 # Messagebox returns Boolean
     if website_entry.get() == "" or email_entry.get() == "" or password_entry.get() == "":
         # ---------Standard Dialogs(Message Box)----------- #
-        messagebox.showinfo(title="Empty Entry Error", message="Blank Fields")
+        messagebox.showinfo(title=" Error ❌", message="Blank Fields")
 
     else:
         # ---------Standard Dialogs(Message Box)----------- #

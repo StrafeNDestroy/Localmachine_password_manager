@@ -12,15 +12,17 @@ import json
 
 
 def generate_password():
-    password_entry.delete(0,END)
+    password_entry.delete(0, END)
 # Password Generator Project
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+               'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    password_letters = [choice(letters) for number in range(randint(8, 10))]
-    password_symbols = [choice(symbols) for number in range(randint(2, 4))]
-    password_numbers = [choice(numbers) for number in range(randint(2, 4))]
+    password_letters = [choice(letters) for _ in range(randint(8, 10))]
+    password_symbols = [choice(symbols) for _ in range(randint(2, 4))]
+    password_numbers = [choice(numbers) for _ in range(randint(2, 4))]
     password_list = password_numbers + password_letters + password_symbols
     shuffle(password_list)
 
@@ -29,6 +31,8 @@ def generate_password():
     password_entry.insert(0, password)
     pyperclip.copy(password)
 # ---------------------------- Update Entries Function ------------------------------- #
+
+
 def update_details():
     try:
         with open("data.json", "r") as data_file:
@@ -50,7 +54,8 @@ def update_details():
             with open("data.json", "w") as data_file:
                 # Saving updated data
                 json.dump(data, data_file, indent=4)
-            messagebox.showinfo(title="Update Account Password",message=f"Password For {update_return_web_name} Updated")
+            messagebox.showinfo(title="Update Account Password", message=f"Password For {update_return_web_name} "
+                                                                         f"Updated")
         else:
             messagebox.showinfo(title="Error", message=f"No entry details for {update_return_web_name} exists")
             website_entry.delete(0, END)
@@ -66,7 +71,7 @@ def search():
             data = json.load(data_file)
 
     except FileNotFoundError:
-        messagebox.showinfo(title="Error",message="No Data File Found")
+        messagebox.showinfo(title="Error", message="No Data File Found")
         website_entry.delete(0, END)
     else:
         if website_name in data:
@@ -78,11 +83,11 @@ def search():
             website_entry.delete(0, END)
 
 
-
-
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
 def save():
-# Messagebox returns Boolean
+    # Messagebox returns Boolean
     website = (website_entry.get()).title()
     email = email_entry.get()
     password = password_entry.get()
@@ -127,6 +132,8 @@ def save():
 # ---------------------------- UI SETUP ------------------------------- #
 
 # ---------Window Setup----------- #
+
+
 window = Tk()
 window.title("Password Manager")
 window.config(padx=50, pady=50, bg="white")
@@ -138,21 +145,21 @@ canvas.grid(column=1, row=0)
 
 # ---------Label Creation----------- #
 website_label_name = Label(text="Website*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
-website_label_name.grid(column=0, row=3, sticky = E)
+website_label_name.grid(column=0, row=3, sticky=E)
 email_label = Label(text="Email/Username*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
-email_label.grid(column=0, row=4,sticky = E)
+email_label.grid(column=0, row=4, sticky=E)
 password_label = Label(text="Password*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
-password_label.grid(column=0, row=5,sticky = E)
-required_fields_label = Label(text="Required Feilds*", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
-required_fields_label.grid(column=0, row=1,sticky = E)
+password_label.grid(column=0, row=5, sticky=E)
+required_fields_label = Label(text="Required Fields*", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
+required_fields_label.grid(column=0, row=1, sticky=E)
 
 # ---------Entry Setup----------- #
 website_entry = Entry(width=35,)
-website_entry.grid(column=1, row=3, sticky = W)
+website_entry.grid(column=1, row=3, sticky=W)
 # Places cursor inside website entry box on application launch
 website_entry.focus()
 email_entry = Entry(width=35)
-email_entry.grid(column=1, row=4, columnspan=2,sticky = W)
+email_entry.grid(column=1, row=4, columnspan=2, sticky=W)
 # inserts a text in a specified index IE zero would beginning of entry end would be at the end character of the entry
 email_entry.insert(0, "jacobjpadilla@outlook.com")
 password_entry = Entry(width=35)
@@ -160,7 +167,7 @@ password_entry.grid(column=1, row=5, sticky=W)
 
 
 # ---------Button Setup----------- #
-generate_button = Button(text="Generate Password",command = generate_password,width=15)
+generate_button = Button(text="Generate Password", command=generate_password, width=15)
 generate_button.grid(column=2, row=5, sticky=W)
 add_button = Button(text="Add", width=30, command=save)
 add_button.grid(column=1, row=6, sticky=W)
@@ -169,6 +176,4 @@ search_button.grid(column=2, row=3, sticky=W)
 update_button = Button(text="Update Details", command=update_details, width=15)
 update_button.grid(column=2, row=4, sticky=W)
 window.mainloop()
-
-
 

@@ -43,22 +43,23 @@ def update_details():
         messagebox.showerror(title="Error", message="No Data File Found")
         website_entry.delete(0, END)
     else:
-        update_return_web_name = (simpledialog.askstring("Update Account Password",
-                                                         f"Please Enter Website Name")).title()
-
-        if update_return_web_name == None:
+        update_return_web_name = simpledialog.askstring("Update Account Password",
+                                                        f"Please Enter Website Name")
+        if update_return_web_name is None:
             pass
-        elif update_return_web_name in data:
-            password = (simpledialog.askstring("Update Account Password", f"Please Enter New Password"))
-            data[update_return_web_name]['password'] = password
-            with open("data.json", "w") as data_file:
-                # Saving updated data
-                json.dump(data, data_file, indent=4)
-            messagebox.showinfo(title="Update Account Password", message=f"Password For {update_return_web_name} "
-                                                                         f"Updated")
-        else:
-            messagebox.showinfo(title="Error", message=f"No entry details for {update_return_web_name} exists")
-            website_entry.delete(0, END)
+        if update_return_web_name is not None:
+            uppercase = update_return_web_name.title()
+            if uppercase in data:
+                password = (simpledialog.askstring("Update Account Password", f"Please Enter New Password"))
+                data[update_return_web_name]['password'] = password
+                with open("data.json", "w") as data_file:
+                    # Saving updated data
+                    json.dump(data, data_file, indent=4)
+                messagebox.showinfo(title="Update Account Password", message=f"Password For {update_return_web_name} "
+                                                                             f"Updated")
+            else:
+                messagebox.showinfo(title="Error", message=f"No entry details for {update_return_web_name} exists")
+                website_entry.delete(0, END)
 
 
 # ---------------------------- Search Function ------------------------------- #
@@ -176,4 +177,3 @@ search_button.grid(column=2, row=3, sticky=W)
 update_button = Button(text="Update Details", command=update_details, width=15)
 update_button.grid(column=2, row=4, sticky=W)
 window.mainloop()
-

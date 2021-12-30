@@ -139,8 +139,6 @@ canvas.grid(column=1, row=0)
 # ---------Label Creation----------- #
 website_label_name = Label(text="Website*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
 website_label_name.grid(column=0, row=3, sticky = E)
-website_label_url = Label(text="Website Url:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
-website_label_url.grid(column=0, row=2, sticky = E)
 email_label = Label(text="Email/Username*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
 email_label.grid(column=0, row=4,sticky = E)
 password_label = Label(text="Password*:", font=("Times New Roman", 10, "bold"), foreground="black", bg="white")
@@ -153,25 +151,23 @@ website_entry = Entry(width=35,)
 website_entry.grid(column=1, row=3, sticky = W)
 # Places cursor inside website entry box on application launch
 website_entry.focus()
-website_url = Entry(width=35)
-website_url.grid(column=1, row=2, sticky = W)
 email_entry = Entry(width=35)
 email_entry.grid(column=1, row=4, columnspan=2,sticky = W)
 # inserts a text in a specified index IE zero would beginning of entry end would be at the end character of the entry
 email_entry.insert(0, "jacobjpadilla@outlook.com")
 password_entry = Entry(width=35)
-password_entry.grid(column=1, row=5,sticky = W)
+password_entry.grid(column=1, row=5, sticky=W)
 
 
 # ---------Button Setup----------- #
 generate_button = Button(text="Generate Password",command = generate_password,width=15)
-generate_button.grid(column=2, row=5,sticky=W)
-add_button = Button(text="Add", width=30,command=save)
-add_button.grid(column=1, row=6,sticky=W)
-search_button = Button(text="Search",width=15,command=search)
-search_button.grid(column=2,row=3,sticky=W)
-update_button  = Button(text="Update Details",command=update_details,width=15)
-update_button.grid(column=2, row=4,sticky=W)
+generate_button.grid(column=2, row=5, sticky=W)
+add_button = Button(text="Add", width=30, command=save)
+add_button.grid(column=1, row=6, sticky=W)
+search_button = Button(text="Search", width=15, command=search)
+search_button.grid(column=2, row=3, sticky=W)
+update_button = Button(text="Update Details", command=update_details, width=15)
+update_button.grid(column=2, row=4, sticky=W)
 window.mainloop()
 
 

@@ -51,14 +51,14 @@ def update_details():
             uppercase = update_return_web_name.title()
             if uppercase in data:
                 password = (simpledialog.askstring("Update Account Password", f"Please Enter New Password"))
-                data[update_return_web_name]['password'] = password
+                data[uppercase]['password'] = password
                 with open("data.json", "w") as data_file:
                     # Saving updated data
                     json.dump(data, data_file, indent=4)
-                messagebox.showinfo(title="Update Account Password", message=f"Password For {update_return_web_name} "
+                messagebox.showinfo(title="Update Account Password", message=f"Password For {uppercase} "
                                                                              f"Updated")
             else:
-                messagebox.showinfo(title="Error", message=f"No entry details for {update_return_web_name} exists")
+                messagebox.showinfo(title="Error", message=f"No entry details for {uppercase} exists")
                 website_entry.delete(0, END)
 
 
